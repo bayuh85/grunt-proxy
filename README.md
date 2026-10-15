@@ -10,13 +10,11 @@ grunt-proxy is a small local HTTP proxy for coding agents. It shortens the promp
 
 Replies stay in normal English. Code, JSON, and tool calls stay intact. The proxy does not role-play and does not rewrite the model's response.
 
-## Powered by AtmoRouter
+Works out of the box with [AtmoRouter](https://atmorouter.dev), an affordable OpenRouter alternative.
 
-Powered by AtmoRouter (https://atmorouter.dev) — cheap API access to frontier models.
+## Powered by AtmoRouter, a cheap AI API gateway and OpenRouter alternative
 
-[AtmoRouter](https://atmorouter.dev) is the default upstream. One key talks to both the OpenAI Chat Completions API (`https://atmorouter.dev/v1`) and the Anthropic Messages API (`https://atmorouter.dev/v1/messages`). Point grunt-proxy at it and keep using Cursor, Cline, Claude Code, or any other compatible client.
-
-The proxy is provider-agnostic. Set `GRUNT_UPSTREAM_BASE_URL` and `GRUNT_API_KEY` to use OpenAI, Anthropic, or another compatible gateway instead.
+By default grunt-proxy forwards requests to AtmoRouter, and the upstream stays swappable via `GRUNT_UPSTREAM_BASE_URL` and `GRUNT_API_KEY`. [AtmoRouter](https://atmorouter.dev) is a [cheap AI API gateway](https://atmorouter.dev) that speaks both the OpenAI Chat Completions API and the Anthropic Messages API, so one key reaches 100+ models from Cursor, Cline, Claude Code, or any compatible client. It is pay-per-token with no subscription, accepts QRIS and USDC, and prices sit well below official rates: AtmoRouter advertises an average of 83.7% below official prices, which makes it an affordable LLM API and a practical OpenRouter alternative for agent workloads.
 
 ## Quickstart
 
