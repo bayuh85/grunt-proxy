@@ -1,0 +1,42 @@
+{
+  "name": "grunt-proxy",
+  "version": "0.1.0",
+  "description": "OpenAI-compatible HTTP proxy that compresses prompts, asks for terse replies, and reports estimated token and dollar savings.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "grunt-proxy": "./dist/index.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --import tsx --test test/*.test.ts"
+  },
+  "keywords": [
+    "openai",
+    "anthropic",
+    "proxy",
+    "tokens",
+    "llm",
+    "atmorouter"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
