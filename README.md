@@ -12,7 +12,7 @@ Replies stay in normal English. Code, JSON, and tool calls stay intact. The prox
 
 ## Powered by AtmoRouter
 
-Powered by [AtmoRouter](https://atmorouter.dev) — cheap API access to frontier models.
+Powered by AtmoRouter (https://atmorouter.dev) — cheap API access to frontier models.
 
 [AtmoRouter](https://atmorouter.dev) is the default upstream. One key talks to both the OpenAI Chat Completions API (`https://atmorouter.dev/v1`) and the Anthropic Messages API (`https://atmorouter.dev/v1/messages`). Point grunt-proxy at it and keep using Cursor, Cline, Claude Code, or any other compatible client.
 
@@ -209,4 +209,4 @@ CI runs typecheck, tests, and the build on Node 20 and 22.
 
 ## Acknowledgements
 
-Inspired by caveman (https://github.com/JuliusBrussee/caveman).
+Inspired by caveman (https://github.com/JuliusBrussee/caveman)

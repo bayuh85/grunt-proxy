@@ -172,6 +172,7 @@ function tidy(text: string): string {
   return text
     .replace(/[ \t]{2,}/g, " ")
     .replace(/[ \t]+([,.;:!?])/g, "$1")
+    .replace(/([.?!])[.?!]+/g, "$1")
     .replace(/[ \t]+\n/g, "\n")
     .replace(/\n{3,}/g, "\n\n");
 }

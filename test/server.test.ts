@@ -116,11 +116,11 @@ describe("server", () => {
       assert.equal(hit.url, "/v1/chat/completions");
       assert.equal(hit.headers.authorization, "Bearer ar-test");
       const forwarded = JSON.parse(hit.body) as { messages: Array<{ role: string; content: string }> };
-      const blob = JSON.stringify(forwarded);
-      assert.ok(blob.includes("[grunt]"));
-      assert.ok(blob.includes("```ts\nconst the = 1;\nfunction configuration() { return the; }\n```"));
-      assert.doesNotMatch(forwarded.messages.map((message) => message.content).join("\n"), /\bplease\b/i);
-      assert.equal(blob.includes("client-secret"), false);
+      const joined = forwarded.messages.map((message) => message.content).join("\n");
+      assert.match(joined, /\[grunt\]/);
+      assert.ok(joined.includes("```ts\nconst the = 1;\nfunction configuration() { return the; }\n```"));
+      assert.doesNotMatch(joined, /\bplease\b/i);
+      assert.equal(hit.body.includes("client-secret"), false);
 
       const savings = (await (await fetch(`${proxy.url}/savings`)).json()) as {
         requests: number;

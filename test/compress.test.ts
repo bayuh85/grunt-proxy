@@ -37,13 +37,14 @@ describe("compressText", () => {
     ].join("\n");
     const out = compressText(input, 2);
     assert.ok(out.includes(FENCE));
-    assert.match(out, /\bconfig\b/);
-    assert.match(out, /\bparam\b/);
-    assert.match(out, /\bfn\b/);
-    assert.match(out, /\bprev\b/);
-    assert.match(out, /\binfo\b/);
-    assert.doesNotMatch(out, /\bconfiguration\b/);
-    assert.doesNotMatch(out, /\bplease\b/i);
+    const prose = out.split("```")[0] ?? "";
+    assert.match(prose, /\bconfig\b/);
+    assert.match(prose, /\bparam\b/);
+    assert.match(prose, /\bfn\b/);
+    assert.match(prose, /\bprev\b/);
+    assert.match(prose, /\binfo\b/);
+    assert.doesNotMatch(prose, /\bconfiguration\b/);
+    assert.doesNotMatch(prose, /\bplease\b/i);
     assert.ok(out.length < input.length);
   });
 

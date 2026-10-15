@@ -60,11 +60,23 @@ describe("rewriteBody", () => {
     assert.equal(result.directiveAdded, true);
     assert.equal(result.promptChanged, true);
     assert.ok(result.originalTokens > 0);
+    assert.ok(isRecord(result.body) && Array.isArray(result.body.messages));
+    const messages = result.body.messages as Array<Record<string, unknown>>;
+    const assistant = messages.find((message) => message.role === "assistant");
+    const toolCalls = assistant?.tool_calls as Array<Record<string, unknown>> | undefined;
+    const call = toolCalls?.[0];
+    const fn = isRecord(call?.function) ? call.function : undefined;
+    assert.equal(fn?.arguments, '{"configuration":"the previous"}');
+    const toolMessage = messages.find((message) => message.role === "tool");
+    assert.equal(
+      toolMessage?.content,
+      '{"configuration":"keep the previous information exactly in this json payload"}',
+    );
+    const tools = (result.body as { tools: Array<{ function: { description: string; parameters: { properties: { configuration: { description: string } } } } }> }).tools;
+    assert.equal(tools[0]?.function.parameters.properties.configuration.description, "the configuration value");
+    assert.doesNotMatch(tools[0]?.function.description ?? "", /\bplease\b/i);
     const encoded = textOf(result.body);
     assert.equal(encoded.split(GRUNT_MARK).length - 1, 1);
-    assert.ok(encoded.includes('{"configuration":"the previous"}'));
-    assert.ok(encoded.includes("the configuration value"));
-    assert.ok(encoded.includes('{"configuration":"keep the previous information exactly in this json payload"}'));
     const again = rewriteBody(result.body, { level: 2, terse: "always", protocol: "openai" });
     assert.equal(textOf(again.body), encoded);
   });
